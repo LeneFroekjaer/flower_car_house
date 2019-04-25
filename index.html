@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #bluelight {
+        display: none;
+      }
+      .blueblink {
+        animation: blink 0.5s infinite;
+      }
+
+      @keyframes blink {
+        0% {
+          r: 30;
+        }
+        100% {
+          r: 10;
+        }
+      }
+
+      .stand {
+        transform: translate(700px, 160px) scale(0.8);
+      }
+      .drive {
+        animation: drive;
+        animation-duration: 4s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-in;
+      }
+      @keyframes drive {
+        0% {
+          transform: translate(700px, 160px) scale(0.8);
+        }
+        100% {
+          transform: translate(-500px, 160px) scale(0.8);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg
+      version="1.1"
+      baseProfile="full"
+      width="1000"
+      height="600"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <!-- Background -->
+      <rect width="100%" height="100%" fill="dodgerblue" />
+      <rect y="480" width="100%" height="120" fill="green" />
+      <rect y="550" width="100%" height="50" fill="dimgray" />
+
+      <!-- HOUSE -->
+      <g id="house">
+        <rect x="0" y="250" width="200" height="300" fill="Khaki " />
+        <polygon points="0,250 220,250 0,150" fill="black " />
+        <rect x="100" y="350" width="80" height="80" fill="lightblue" />
+        <rect x="100" y="350" width="20" height="80" fill="LightSeaGreen " />
+        <rect x="160" y="350" width="20" height="80" fill="LightSeaGreen " />
+        <rect x="0" y="350" width="80" height="200" fill="BurlyWood   " />
+        <circle cx="65" cy="450" r="5" fill="black" />
+      </g>
+      <!-- FLOWER -->
+      <g id="flower" transform="translate(50 185) scale(0.7)">
+        <!-- potten -->
+        <polygon points="120,350 140,350 145,310 115,310" fill="coral" />
+        <!-- flower 1 -->
+        <line
+          x1="135"
+          y1="310"
+          x2="140"
+          y2="280"
+          stroke="green"
+          stroke-width="2"
+        />
+        <circle cx="140" cy="280" r="8" fill="purple" />
+        <circle cx="140" cy="280" r="4" fill="yellow" />
+        <!-- flower 2 -->
+        <line
+          x1="125"
+          y1="310"
+          x2="120"
+          y2="280"
+          stroke="green"
+          stroke-width="2"
+        />
+        <circle cx="120" cy="280" r="8" fill="blue" />
+        <circle cx="120" cy="280" r="4" fill="yellow" />
+        <!-- flower 3 -->
+        <line
+          x1="130"
+          y1="310"
+          x2="130"
+          y2="280"
+          stroke="green"
+          stroke-width="2"
+        />
+        <circle cx="130" cy="280" r="8" fill="red" />
+        <circle cx="130" cy="280" r="4" fill="yellow" />
+      </g>
+
+      <!-- CAR -->
+      <g id="car" class="stand">
+        <path
+          d="M100 500 L 500 500 L 500 450 C 500 430, 480 425, 480 425 L 440 425 C 440 425, 420 370, 400 370 C 380 360, 250 360, 240 370 C 220 380 , 200 425, 200 425 C 200 425 , 120 440, 100 470 Z"
+          fill="white"
+        />
+        <!-- wheels -->
+        <circle cx="200" cy="490" r="40" fill="black" />
+        <circle cx="200" cy="490" r="30" fill="grey" />
+        <circle cx="420" cy="490" r="40" fill="black" />
+        <circle cx="420" cy="490" r="30" fill="grey" />
+
+        <!-- windows -->
+        <path
+          d="M210 425 L 290 425 L 290 370 C 210 370 , 220 415, 210 425 Z "
+          fill="lightgrey"
+        />
+        <path
+          d="M320 425 L 420 425 C 420 415 , 400 375, 390 375 L 320 370 Z "
+          fill="lightgrey"
+        />
+
+        <!-- light -->
+        <rect x="100" y="470" width="10" height="20" fill="yellow" />
+        <rect x="490" y="470" width="10" height="20" fill="red" />
+        <rect x="300" y="354" width="20" height="10" fill="blue" />
+        <circle
+          id="bluelight"
+          cx="310"
+          cy="354"
+          r="30"
+          fill="rgba(0,0,255,0.3)"
+        />
+        <text x="310" y="460" font-size="30" text-anchor="middle" fill="black">
+          POLICE
+        </text>
+      </g>
+    </svg>
+    <script>
+      window.setTimeout(startBlink, 2500);
+      window.setTimeout(startCar, 3500);
+      function startBlink() {
+        document.querySelector("#bluelight").style.display = "block";
+        document.querySelector("#bluelight").classList.add("blueblink");
+      }
+      function startCar() {
+        document.querySelector("#car").classList.remove("stand");
+        document.querySelector("#car").classList.add("drive");
+        document
+          .querySelector(".drive")
+          .addEventListener("animationend", endCar);
+      }
+
+      function endCar() {
+        document.querySelector("#car").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
